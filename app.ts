@@ -12,7 +12,7 @@ import registerRouter from "./routes/registerRouter";
 //Define app
 const app = express()
 
-const allowedOrigins = [process.env.ORIGIN1 as string, process.env.ORIGIN2 as string];
+const allowedOrigins = [process.env.ORIGIN1 as string];
 
 //Middleware
 app.use(cors({
