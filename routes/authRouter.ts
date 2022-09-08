@@ -1,6 +1,7 @@
 //Import tools
 import { Router } from "express";
 import { dataAuthValidation } from "../middleware/dataAuthValidation";
+import { adminAuth } from "../middleware/adminAuth";
 import { UserModel } from "../models/User";
 import { generateRefreshToken, generateToken } from "../utils/tokenManager";
 import jwt from "jsonwebtoken";
@@ -97,10 +98,19 @@ authRouter.get("/logout", async (req: any, res: any) => {
 	res.json({ mesage: "Logout" });
 });
 
-authRouter.get("/:id", async (req: any, res: any) => {
+authRouter.get("/:id", adminAuth, async (req: any, res: any) => {
 	try {
 		const user = await UserModel.findById(req.params.id);
 		return res.json({ name: user?.name });
+	} catch (error: any) {
+		return res.status(500).json({ message: error.message });
+	}
+});
+
+authRouter.get("/", adminAuth, async (req: any, res: any) => {
+	try {
+		const user = await UserModel.find().lean();
+		return res.json({ user });
 	} catch (error: any) {
 		return res.status(500).json({ message: error.message });
 	}
