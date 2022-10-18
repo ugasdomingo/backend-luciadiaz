@@ -2,24 +2,24 @@
 import { Schema, model } from "mongoose";
 
 //Create Regiter Schema
-const registerSchema = new Schema({
+const TemperTestSchema = new Schema({
 	date: {
 		type: Date,
 		default: Date.now(),
 	},
-	pensamiento: {
+	sanguine: {
 		type: String,
 		required: true,
 	},
-	emocion: {
+	choleric: {
 		type: String,
 		required: true,
 	},
-	accion: {
+	phlegmatic: {
 		type: String,
 		required: true,
 	},
-	detonante: {
+	melancholic: {
 		type: String,
 		required: true,
 	},
@@ -30,4 +30,4 @@ const registerSchema = new Schema({
 	},
 });
 
-export default model("Register", registerSchema);
+export default model("TemperTest", TemperTestSchema);

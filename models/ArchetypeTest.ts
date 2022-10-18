@@ -2,24 +2,24 @@
 import { Schema, model } from "mongoose";
 
 //Create Regiter Schema
-const registerSchema = new Schema({
+const ArchetypeTestSchema = new Schema({
 	date: {
 		type: Date,
 		default: Date.now(),
 	},
-	pensamiento: {
+	wise: {
 		type: String,
 		required: true,
 	},
-	emocion: {
+	warrior: {
 		type: String,
 		required: true,
 	},
-	accion: {
+	wizard: {
 		type: String,
 		required: true,
 	},
-	detonante: {
+	lover: {
 		type: String,
 		required: true,
 	},
@@ -30,4 +30,4 @@ const registerSchema = new Schema({
 	},
 });
 
-export default model("Register", registerSchema);
+export default model("ArchetypeTest", ArchetypeTestSchema);

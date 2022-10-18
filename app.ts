@@ -8,6 +8,9 @@ import morgan from "morgan";
 import authRouter from "./routes/authRouter";
 import blogRouter from "./routes/blogRouter";
 import registerRouter from "./routes/registerRouter";
+import thoughtsTestRouter from "./routes/thoughtsTestRouter";
+import archetypeTestRouter from "./routes/archetypeTestRouter";
+import temperTestRouter from "./routes/temperTestRouter";
 
 //Define app
 const app = express();
@@ -38,6 +41,9 @@ app.use(express.json());
 app.use("/api", authRouter);
 app.use("/api/blog", blogRouter);
 app.use("/api/self-register", registerRouter);
+app.use("/api/thoughts-test", thoughtsTestRouter);
+app.use("/api/archetype-test", archetypeTestRouter);
+app.use("/api/temper-test", temperTestRouter);
 
 //Export app
 export default app;
