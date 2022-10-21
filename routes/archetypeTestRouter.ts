@@ -2,6 +2,7 @@
 import { Router } from "express";
 import { userAuth } from "../middleware/userAuth";
 import { adminAuth } from "../middleware/adminAuth";
+import { userOrAdminAuth } from "../middleware/userOrAdminAuth";
 import {
 	createArchetypeTest,
 	deleteArchetypeTest,
@@ -18,7 +19,7 @@ archetypeTestRouter.get("/archetype", adminAuth, getAllArchetypeTest);
 
 archetypeTestRouter.post("/archetype", userAuth, createArchetypeTest);
 
-archetypeTestRouter.get("/archetype/:id", adminAuth, getArchetypeTest);
+archetypeTestRouter.get("/archetype/:id", userOrAdminAuth, getArchetypeTest);
 
 archetypeTestRouter.delete("/archetype/:id", adminAuth, deleteArchetypeTest);
 

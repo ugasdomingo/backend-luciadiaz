@@ -41,7 +41,7 @@ export const createTemperTest = async (req: any, res: any) => {
 export const getTemperTest = async (req: any, res: any) => {
 	try {
 		const temperTest = await TemperTest.find({
-			_id: req.params.id,
+			uid: req.params.id,
 		}).lean();
 		return res.json({ temperTest });
 	} catch (error: any) {

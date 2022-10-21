@@ -41,7 +41,7 @@ export const createArchetypeTest = async (req: any, res: any) => {
 export const getArchetypeTest = async (req: any, res: any) => {
 	try {
 		const archetypeTest = await ArchetypeTest.find({
-			_id: req.params.id,
+			uid: req.params.id,
 		}).lean();
 		return res.json({ archetypeTest });
 	} catch (error: any) {

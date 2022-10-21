@@ -38,7 +38,7 @@ export const createRegister = async (req: any, res: any) => {
 	}
 };
 
-// getRegister Controller
+// getRegister by User ID Controller
 export const getRegister = async (req: any, res: any) => {
 	try {
 		const register = await Register.find({ uid: req.params.id }).lean();

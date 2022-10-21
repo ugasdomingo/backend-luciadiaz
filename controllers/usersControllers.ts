@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 // Login --> Line 38
 // Refresh --> Line 61
 // Logout --> Line 85
+// Self --> Line 85
 // oneUser --> Line 91
 // allUsers --> Line 101
 
@@ -86,6 +87,26 @@ export const refresh = async (req: any, res: any) => {
 export const logout = async (req: any, res: any) => {
 	res.clearCookie("refreshToken");
 	res.json({ mesage: "Logout" });
+};
+
+// self Controller
+export const self = async (req: any, res: any) => {
+	//Payload for req.uid
+	interface JwtPayload {
+		uid: string;
+	}
+	try {
+		let token = req.headers.authorization;
+		if (!token) throw new Error("Debes hacer login para ver esta página");
+		token = token.split(" ")[1];
+		const { uid } = jwt.verify(
+			token,
+			process.env.JWT_SECRET as string
+		) as JwtPayload;
+		return res.json({ uid });
+	} catch (error: any) {
+		return res.status(500).json({ message: error.message });
+	}
 };
 
 // oneUser Controller

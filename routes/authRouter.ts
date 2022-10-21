@@ -9,6 +9,7 @@ import {
 	logout,
 	oneUser,
 	allUsers,
+	self,
 } from "../controllers/usersControllers";
 
 //Define router
@@ -22,6 +23,8 @@ authRouter.post("/login", dataAuthValidation, login);
 authRouter.get("/refresh", refresh);
 
 authRouter.get("/logout", logout);
+
+authRouter.get("/self", self);
 
 authRouter.get("/:id", adminAuth, oneUser);
 

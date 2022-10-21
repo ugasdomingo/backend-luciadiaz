@@ -38,7 +38,7 @@ export const createThoughtsTest = async (req: any, res: any) => {
 export const getThoughtsTest = async (req: any, res: any) => {
 	try {
 		const thoughtsTest = await ThoughtsTest.find({
-			_id: req.params.id,
+			uid: req.params.id,
 		}).lean();
 		return res.json({ thoughtsTest });
 	} catch (error: any) {
