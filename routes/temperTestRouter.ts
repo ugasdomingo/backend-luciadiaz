@@ -2,6 +2,7 @@
 import { Router } from "express";
 import { userAuth } from "../middleware/userAuth";
 import { adminAuth } from "../middleware/adminAuth";
+import { userOrAdminAuth } from "../middleware/userOrAdminAuth";
 import {
 	createTemperTest,
 	deleteTemperTest,
@@ -18,7 +19,7 @@ temperTestRouter.get("/temper", adminAuth, getAllTemperTest);
 
 temperTestRouter.post("/temper", userAuth, createTemperTest);
 
-temperTestRouter.get("/temper/:id", adminAuth, getTemperTest);
+temperTestRouter.get("/temper/:id", userOrAdminAuth , getTemperTest);
 
 temperTestRouter.delete("/temper/:id", adminAuth, deleteTemperTest);
 
