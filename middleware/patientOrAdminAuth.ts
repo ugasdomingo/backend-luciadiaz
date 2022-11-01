@@ -6,7 +6,7 @@ interface JwtPayload {
 	uid: string;
 }
 
-export const userOrAdminAuth = async (req: any, res: any, next: any) => {
+export const patientOrAdminAuth = async (req: any, res: any, next: any) => {
 	try {
 		let token = req.headers.authorization;
 		if (!token) throw new Error("Debes hacer login para ver esta página");
@@ -18,10 +18,10 @@ export const userOrAdminAuth = async (req: any, res: any, next: any) => {
 		) as JwtPayload;
 		req.uid = uid;
 
-		//Is Admin or a regitered user?
+		//Is Admin or a patient?
 		const Admin = await UserModel.findOne({ _id: uid });
 		if (Admin?.role !== "Admin")
-			if (uid != Admin?._id)
+			if (Admin?.role !== "patient")
 				throw new Error(
 					"No tienes autorización para hacer esta operación"
 				);

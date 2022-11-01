@@ -1,7 +1,7 @@
 //Import tools
 import { Router } from "express";
-import { userAuth } from "../middleware/userAuth";
 import { adminAuth } from "../middleware/adminAuth";
+import { patientOrAdminAuth } from "../middleware/patientOrAdminAuth";
 import {
 	createRegister,
 	deleteRegister,
@@ -16,7 +16,7 @@ const registerRouter = Router();
 //Routes
 registerRouter.get("/register", adminAuth, getAllRegisters);
 
-registerRouter.post("/register", userAuth, createRegister);
+registerRouter.post("/register", patientOrAdminAuth, createRegister);
 
 registerRouter.get("/register/:id", adminAuth, getRegister);
 
