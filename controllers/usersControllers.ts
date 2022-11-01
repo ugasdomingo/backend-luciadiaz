@@ -28,8 +28,9 @@ export const register = async (req: any, res: any) => {
 		//Email Validation
 
 		//Generate Token & RefreshToken
+		const response = { ...generateToken(user.id), role: user.role };
 		generateRefreshToken(user.id, res);
-		return res.json(generateToken(user.id));
+		return res.json(response);
 	} catch (error) {
 		console.error(error);
 		return res.status(500).json({ message: "Error en el servidor" });
@@ -51,8 +52,9 @@ export const login = async (req: any, res: any) => {
 			return res.status(400).json({ message: "Credenciales Inválidas" });
 
 		//Generate Token & RefreshToken
+		const response = { ...generateToken(user.id), role: user.role };
 		generateRefreshToken(user.id, res);
-		return res.json(generateToken(user.id));
+		return res.json(response);
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({ message: "Error en el servidor" });
