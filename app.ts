@@ -11,6 +11,7 @@ import registerRouter from "./routes/registerRouter";
 import thoughtsTestRouter from "./routes/thoughtsTestRouter";
 import archetypeTestRouter from "./routes/archetypeTestRouter";
 import temperTestRouter from "./routes/temperTestRouter";
+import sixReasonsTestRouter from "./routes/sixReasonsTestRouter";
 
 //Define app
 const app = express();
@@ -44,6 +45,7 @@ app.use("/api/self-register", registerRouter);
 app.use("/api/thoughts-test", thoughtsTestRouter);
 app.use("/api/archetype-test", archetypeTestRouter);
 app.use("/api/temper-test", temperTestRouter);
+app.use("/api/six-reasons-test", sixReasonsTestRouter);
 
 //Export app
 export default app;
