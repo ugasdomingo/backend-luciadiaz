@@ -7,7 +7,9 @@ import morgan from "morgan";
 //Import Routes
 import authRouter from "./routes/authRouter";
 import blogRouter from "./routes/blogRouter";
+import coursesRouter from "./routes/coursesRouter";
 import registerRouter from "./routes/registerRouter";
+import enrollmentRouter from "./routes/enrollmentRouter";
 import thoughtsTestRouter from "./routes/thoughtsTestRouter";
 import archetypeTestRouter from "./routes/archetypeTestRouter";
 import temperTestRouter from "./routes/temperTestRouter";
@@ -41,10 +43,12 @@ app.use(express.json());
 //Routes
 app.use("/api", authRouter);
 app.use("/api/blog", blogRouter);
+app.use("/api/courses", coursesRouter);
+app.use("/api/enrollment", enrollmentRouter);
+app.use("/api/temper-test", temperTestRouter);
 app.use("/api/self-register", registerRouter);
 app.use("/api/thoughts-test", thoughtsTestRouter);
 app.use("/api/archetype-test", archetypeTestRouter);
-app.use("/api/temper-test", temperTestRouter);
 app.use("/api/six-reasons-test", sixReasonsTestRouter);
 
 //Export app
