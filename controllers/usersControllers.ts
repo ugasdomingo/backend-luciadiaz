@@ -13,7 +13,7 @@ import jwt from "jsonwebtoken";
 
 // Register Controller
 export const register = async (req: any, res: any) => {
-	const { name, email, password } = req.body;
+	const { name, email, password, politiquesAccepted } = req.body;
 
 	try {
 		//Validate unique user
@@ -22,7 +22,7 @@ export const register = async (req: any, res: any) => {
 			return res.status(400).json({ message: "Usuario ya Existe" });
 
 		//Create new user
-		const user = new UserModel({ name, email, password });
+		const user = new UserModel({ name, email, password, politiquesAccepted });
 		await user.save();
 
 		//Email Validation
@@ -111,10 +111,19 @@ export const self = async (req: any, res: any) => {
 	}
 };
 
-// oneUser Controller
-export const oneUser = async (req: any, res: any) => {
+// User by ID Controller
+export const userByID = async (req: any, res: any) => {
 	try {
 		const user = await UserModel.findById(req.params.id);
+		return res.json({ name: user?.name });
+	} catch (error: any) {
+		return res.status(500).json({ message: error.message });
+	}
+};
+// User by Mail Controller
+export const userByEmail = async (req: any, res: any) => {
+	try {
+		const user = await UserModel.findOne({email: req.params.email});
 		return res.json({ name: user?.name });
 	} catch (error: any) {
 		return res.status(500).json({ message: error.message });

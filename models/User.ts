@@ -38,6 +38,10 @@ const userSchema = new Schema({
 		type: String,
 		default: "visitante",
 	},
+	politiquesAccepted: {
+		type: Boolean,
+		default: "visitante",
+	},
 });
 
 //Schema methods

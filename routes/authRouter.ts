@@ -7,7 +7,8 @@ import {
 	login,
 	refresh,
 	logout,
-	oneUser,
+	userByID,
+	userByEmail,
 	allUsers,
 	self,
 } from "../controllers/usersControllers";
@@ -26,7 +27,9 @@ authRouter.get("/logout", logout);
 
 authRouter.get("/self", self);
 
-authRouter.get("/:id", adminAuth, oneUser);
+authRouter.get("/:id", userByID);
+
+authRouter.get("/user/:email", userByEmail);
 
 authRouter.get("/", adminAuth, allUsers);
 
