@@ -7,8 +7,8 @@ const AnamnesisSchema = new Schema({
 		type: Date,
 		default: Date.now(),
 	},
-    response: {
-        type: Object,
+    respuestas: {
+        type: Array,
         required: true,
     },
     uid: {
