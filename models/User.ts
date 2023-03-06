@@ -40,7 +40,7 @@ const userSchema = new Schema({
 	},
 	politiquesAccepted: {
 		type: Boolean,
-		default: "visitante",
+		default: false,
 	},
 });
 
