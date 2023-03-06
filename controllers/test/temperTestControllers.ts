@@ -1,5 +1,5 @@
 //Import tools
-import TemperTest from "../models/TemperTest";
+import TemperTest from "../../models/test/TemperTest";
 
 // getAllTemperTest --> Line 10
 // createTemperTest --> Line 20

@@ -8,7 +8,7 @@ import {
 	getThoughtsTest,
 	deleteThoughtsTest,
 	updateThoughtsTest,
-} from "../controllers/thoughtsTestControllers";
+} from "../controllers/test/thoughtsTestControllers";
 
 //Define router
 const thoughtsTestRouter = Router();

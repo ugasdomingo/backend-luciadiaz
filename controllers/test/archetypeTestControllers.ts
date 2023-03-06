@@ -1,5 +1,5 @@
 //Import tools
-import ArchetypeTest from "../models/ArchetypeTest";
+import ArchetypeTest from "../../models/test/ArchetypeTest";
 
 // getAllArchetypeTest --> Line 10
 // createArchetypeTest --> Line 20

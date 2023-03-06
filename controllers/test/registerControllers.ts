@@ -1,5 +1,5 @@
 //Import tools
-import Register from "../models/Register";
+import Register from "../../models/test/Register";
 
 // getAllRegisters --> Line 10
 // createRegister --> Line 20

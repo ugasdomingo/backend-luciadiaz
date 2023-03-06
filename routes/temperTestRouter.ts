@@ -9,7 +9,7 @@ import {
 	getAllTemperTest,
 	getTemperTest,
 	updateTemperTest,
-} from "../controllers/temperTestControllers";
+} from "../controllers/test/temperTestControllers";
 
 //Define router
 const temperTestRouter = Router();

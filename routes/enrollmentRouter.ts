@@ -2,7 +2,7 @@
 import { Router } from "express";
 import { adminAuth } from "../middleware/adminAuth";
 import { userAuth } from "../middleware/userAuth";
-import { getAllEnrollment, createEnrollment, getEnrollment, deleteEnrollment, updateEnrollment } from "../controllers/enrollmentControllers";
+import { getAllEnrollment, createEnrollment, getEnrollment, deleteEnrollment, updateEnrollment } from "../controllers/cursos/enrollmentControllers";
 
 //Define router
 const enrollmentRouter = Router();

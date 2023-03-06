@@ -1,5 +1,5 @@
 //Import tools
-import Anamneses from "../models/Anamneses";
+import Anamneses from "../../models/test/Anamneses";
 
 // getAllAnamneses Controller
 export const getAllAnamneses = async (req: any, res: any) => {

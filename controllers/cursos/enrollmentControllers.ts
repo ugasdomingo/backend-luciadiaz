@@ -1,5 +1,5 @@
 //Import tools
-import Enrollment from "../models/Enrollment";
+import Enrollment from "../../models/cursos/Enrollment";
 
 // getAllEnrollment --> Line 10
 // createEnrollment --> Line 20

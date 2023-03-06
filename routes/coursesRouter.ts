@@ -1,7 +1,7 @@
 //Import tools
 import { Router } from "express";
 import { adminAuth } from "../middleware/adminAuth";
-import { createCourses, getAllCourses, deleteCourses, updateCourses, getCourses } from "../controllers/coursesControllers";
+import { createCourses, getAllCourses, deleteCourses, updateCourses, getCourses } from "../controllers/cursos/coursesControllers";
 
 //Define router
 const coursesRouter = Router();

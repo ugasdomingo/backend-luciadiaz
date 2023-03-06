@@ -9,7 +9,7 @@ import {
 	getAllArchetypeTest,
 	getArchetypeTest,
 	updateArchetypeTest,
-} from "../controllers/archetypeTestControllers";
+} from "../controllers/test/archetypeTestControllers";
 
 //Define router
 const archetypeTestRouter = Router();

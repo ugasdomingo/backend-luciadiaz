@@ -1,5 +1,5 @@
 //Import tools
-import ThoughtsTest from "../models/ThoughtsTest";
+import ThoughtsTest from "../../models/test/ThoughtsTest";
 
 // getAllThoughtsTest --> Line 10
 // createThoughtsTest --> Line 20

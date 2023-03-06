@@ -9,7 +9,7 @@ import {
 	getSixReasonsTest,
 	deleteSixReasonsTest,
 	updateSixReasonsTest,
-} from "../controllers/sixReasonsTestControllers";
+} from "../controllers/test/sixReasonsTestControllers";
 
 //Define router
 const sixReasonsTestRouter = Router();

@@ -10,6 +10,7 @@ import blogRouter from "./routes/blogRouter";
 import coursesRouter from "./routes/coursesRouter";
 import registerRouter from "./routes/registerRouter";
 import enrollmentRouter from "./routes/enrollmentRouter";
+import bestDadRouter from "./routes/bestDadRouter"
 import anamnesesRouter from "./routes/anamnesesRouter";
 import thoughtsTestRouter from "./routes/thoughtsTestRouter";
 import archetypeTestRouter from "./routes/archetypeTestRouter";
@@ -46,6 +47,7 @@ app.use("/api", authRouter);
 app.use("/api/blog", blogRouter);
 app.use("/api/courses", coursesRouter);
 app.use("/api/enrollment", enrollmentRouter);
+app.use("/api/best-dad", bestDadRouter);
 app.use("/api/anamnesis", anamnesesRouter);
 app.use("/api/temper-test", temperTestRouter);
 app.use("/api/self-register", registerRouter);

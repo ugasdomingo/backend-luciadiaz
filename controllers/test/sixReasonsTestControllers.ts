@@ -1,5 +1,5 @@
 //Import tools
-import SixReasonsTest from "../models/SixReasonsTest";
+import SixReasonsTest from "../../models/test/SixReasonsTest";
 
 // getAllSixReasonsTest --> Line 10
 // createSixReasonsTest --> Line 20

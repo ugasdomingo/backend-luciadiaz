@@ -8,7 +8,7 @@ import {
 	getAllRegisters,
 	getRegister,
 	updateRegister,
-} from "../controllers/registerControllers";
+} from "../controllers/test/registerControllers";
 
 //Define router
 const registerRouter = Router();
