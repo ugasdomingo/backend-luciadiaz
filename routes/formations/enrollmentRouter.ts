@@ -1,8 +1,8 @@
 //Import tools
 import { Router } from "express";
-import { adminAuth } from "../middleware/adminAuth";
-import { userAuth } from "../middleware/userAuth";
-import { getAllEnrollment, createEnrollment, getEnrollment, deleteEnrollment, updateEnrollment } from "../controllers/cursos/enrollmentControllers";
+import { adminAuth } from "../../middleware/adminAuth";
+import { userAuth } from "../../middleware/userAuth";
+import { getAllEnrollment, createEnrollment, getEnrollment, deleteEnrollment, updateEnrollment } from "../../controllers/formations/enrollmentControllers";
 
 //Define router
 const enrollmentRouter = Router();
@@ -12,7 +12,7 @@ enrollmentRouter.get("/", adminAuth, getAllEnrollment);
 
 enrollmentRouter.post("/", userAuth, createEnrollment);
 
-enrollmentRouter.get("/:id", adminAuth, getEnrollment);
+enrollmentRouter.get("/:id", userAuth, getEnrollment);
 
 enrollmentRouter.delete("/:id", adminAuth, deleteEnrollment);
 

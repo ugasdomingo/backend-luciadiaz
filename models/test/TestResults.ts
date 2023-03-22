@@ -2,10 +2,15 @@
 import { Schema, model } from "mongoose";
 
 //Create Regiter Schema
-const AnamnesesSchema = new Schema({
+const testResultsSchema = new Schema({
     date: {
 		type: Date,
 		default: Date.now(),
+	},
+    tid: {
+		type: Schema.Types.ObjectId,
+		ref: "Test",
+		required: true,
 	},
     respuestas: {
         type: Object,
@@ -18,4 +23,4 @@ const AnamnesesSchema = new Schema({
 	},
 })
 
-export default model("Anamneses", AnamnesesSchema);
+export default model("TestResults", testResultsSchema);

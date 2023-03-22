@@ -8,15 +8,12 @@ import cookieParser from "cookie-parser";
 //Import Routes
 import authRouter from "./routes/authRouter";
 import blogRouter from "./routes/blogRouter";
-import coursesRouter from "./routes/coursesRouter";
-import registerRouter from "./routes/registerRouter";
-import enrollmentRouter from "./routes/enrollmentRouter";
-import bestDadRouter from "./routes/bestDadRouter"
-import anamnesesRouter from "./routes/anamnesesRouter";
-import thoughtsTestRouter from "./routes/thoughtsTestRouter";
-import archetypeTestRouter from "./routes/archetypeTestRouter";
-import temperTestRouter from "./routes/temperTestRouter";
-import sixReasonsTestRouter from "./routes/sixReasonsTestRouter";
+import booksRouter from "./routes/books/booksRouter";
+import bestDadRouter from "./routes/books/bestDadFormRouter";
+import coursesRouter from "./routes/formations/coursesRouter";
+import enrollmentRouter from "./routes/formations/enrollmentRouter";
+import testRouter from "./routes/test/testRouter";
+import testResultsRouter from "./routes/test/testResultsRouter";
 
 //Define app
 const app = express();
@@ -47,15 +44,12 @@ app.use(cookieParser());
 //Routes
 app.use("/api", authRouter);
 app.use("/api/blog", blogRouter);
+app.use("/api/books", booksRouter);
+app.use("/api/books/best-dad", bestDadRouter);
 app.use("/api/courses", coursesRouter);
-app.use("/api/enrollment", enrollmentRouter);
-app.use("/api/best-dad", bestDadRouter);
-app.use("/api/anamnesis", anamnesesRouter);
-app.use("/api/temper-test", temperTestRouter);
-app.use("/api/self-register", registerRouter);
-app.use("/api/thoughts-test", thoughtsTestRouter);
-app.use("/api/archetype-test", archetypeTestRouter);
-app.use("/api/six-reasons-test", sixReasonsTestRouter);
+app.use("/api/courses/enrollment", enrollmentRouter);
+app.use("/api/test", testRouter);
+app.use("/api/test/results", testResultsRouter);
 
 //Export app
 export default app;

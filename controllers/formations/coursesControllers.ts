@@ -1,5 +1,5 @@
 //Import tools
-import Courses from "../../models/cursos/Courses";
+import Courses from "../../models/formations/Courses";
 
 // getAllCourses --> Line 10
 // createCourses --> Line 20

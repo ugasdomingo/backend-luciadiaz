@@ -1,9 +1,8 @@
 // Import tools
 import { Schema, model } from "mongoose";
-import { Script } from "vm";
 
 //Create BestDad Schema
-const BestDadSchema = new Schema({
+const bestDadSchema = new Schema({
     date: {
 		type: Date,
 		default: Date.now(),
@@ -40,4 +39,4 @@ const BestDadSchema = new Schema({
 	},
 })
 
-export default model("BestDad", BestDadSchema);
+export default model("BestDadForm", bestDadSchema);

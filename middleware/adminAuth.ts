@@ -1,6 +1,6 @@
 //Import tools
 import jwt from 'jsonwebtoken';
-import { UserModel } from '../models/User';
+import { UserModel } from '../models/users/UserData';
 
 interface JwtPayload {
   uid: string;

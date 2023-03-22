@@ -1,15 +1,15 @@
 // Import tools
 import { Schema, model } from "mongoose";
-import { Script } from "vm";
 
 //Create Enrollment Schema
-const EnrollmentSchema = new Schema({
+const enrollmentSchema = new Schema({
     date: {
 		type: Date,
 		default: Date.now(),
 	},
-    formationID: {
-		type: String,
+    fid: {
+		type: Schema.Types.ObjectId,
+		ref: "Courses",
 		required: true,
 	},
 	numberProof: {
@@ -32,4 +32,4 @@ const EnrollmentSchema = new Schema({
 	},
 })
 
-export default model("Enrollments", EnrollmentSchema);
+export default model("Enrollments", enrollmentSchema);

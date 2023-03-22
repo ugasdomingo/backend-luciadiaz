@@ -1,5 +1,5 @@
 // Import Tools
-import { UserModel } from "../models/User";
+import { UserModel } from "../models/users/UserData";
 import { generateRefreshToken, generateToken } from "../utils/tokenManager";
 import jwt from "jsonwebtoken";
 
@@ -13,7 +13,7 @@ import jwt from "jsonwebtoken";
 
 // Register Controller
 export const register = async (req: any, res: any) => {
-	const { name, email, password, politiquesAccepted } = req.body;
+	const { userName, email, password, politiquesAccepted, phone } = req.body;
 
 	try {
 		//Validate unique user
@@ -22,7 +22,7 @@ export const register = async (req: any, res: any) => {
 			return res.status(400).json({ message: "Usuario ya Existe" });
 
 		//Create new user
-		const user = new UserModel({ name, email, password, politiquesAccepted });
+		const user = new UserModel({ userName, email, password, politiquesAccepted, phone });
 		await user.save();
 
 		//Email Validation
@@ -115,7 +115,7 @@ export const self = async (req: any, res: any) => {
 export const userByID = async (req: any, res: any) => {
 	try {
 		const user = await UserModel.findById(req.params.id);
-		return res.json({ name: user?.name });
+		return res.json({ userName: user?.userName });
 	} catch (error: any) {
 		return res.status(500).json({ message: error.message });
 	}
@@ -124,7 +124,7 @@ export const userByID = async (req: any, res: any) => {
 export const userByEmail = async (req: any, res: any) => {
 	try {
 		const user = await UserModel.findOne({email: req.params.email});
-		return res.json({ name: user?.name });
+		return res.json({ userName: user?.userName });
 	} catch (error: any) {
 		return res.status(500).json({ message: error.message });
 	}

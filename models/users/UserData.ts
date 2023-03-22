@@ -1,13 +1,16 @@
 //Import tools
-import { Schema, model, Model, Document } from "mongoose";
+import { Schema, model, Model, Document, Date } from "mongoose";
 import bcryptjs from "bcryptjs";
 
 //Create Schema Methods Definitions
 interface IUserDocument extends Document {
-	name: string;
+	date: Date;
+	userName: string;
 	email: string;
 	password: string;
+	phone: string;
 	role: string;
+	politiquesAccepted: boolean;
 }
 
 export interface IUser extends IUserDocument {
@@ -18,7 +21,16 @@ interface IUserModel extends Model<IUserDocument, {}> {}
 
 //Create User Schema
 const userSchema = new Schema({
-	name: {
+	date: {
+		type: Date,
+		default: Date.now(),
+	},
+	userName: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+	phone: {
 		type: String,
 		required: true,
 		trim: true,

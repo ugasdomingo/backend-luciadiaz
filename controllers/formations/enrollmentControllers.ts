@@ -1,5 +1,5 @@
 //Import tools
-import Enrollment from "../../models/cursos/Enrollment";
+import Enrollment from "../../models/formations/Enrollment";
 
 // getAllEnrollment --> Line 10
 // createEnrollment --> Line 20
@@ -35,9 +35,13 @@ export const createEnrollment = async (req: any, res: any) => {
 export const getEnrollment = async (req: any, res: any) => {
 	try {
 		const enrollments = await Enrollment.findById(req.params.id);
-
+		
 		if (!enrollments)
 			return res.status(404).json({ message: "Enrollment no encontrado" });
+
+		if (req.uid != enrollments?.uid)
+			return res.status(401).json({ message: "No estás autorizado para ver esta información" });
+
 		res.send(enrollments);
 	} catch (error) {
 		return res.status(500).json({ message: "Formato id inválido" });
