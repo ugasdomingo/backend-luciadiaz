@@ -1,6 +1,8 @@
 //Tools Import 
 import mongoose from 'mongoose';
 
+//Warning
+mongoose.set("strictQuery", false);
 
 //Connect to MongoDB 
 export const startConnection = async () => {

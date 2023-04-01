@@ -13,7 +13,7 @@ import jwt from "jsonwebtoken";
 
 // Register Controller
 export const register = async (req: any, res: any) => {
-	const { userName, email, password, politiquesAccepted, phone } = req.body;
+	const { name, email, phone, password, politiquesAccepted,  } = req.body;
 
 	try {
 		//Validate unique user
@@ -22,13 +22,13 @@ export const register = async (req: any, res: any) => {
 			return res.status(400).json({ message: "Usuario ya Existe" });
 
 		//Create new user
-		const user = new UserModel({ userName, email, password, politiquesAccepted, phone });
+		const user = new UserModel({ name, email, phone, password, politiquesAccepted,  });
 		await user.save();
 
 		//Email Validation
 
 		//Generate Token & RefreshToken
-		const response = { ...generateToken(user.id), role: user.role };
+		const response = { ...generateToken(user.id), politiques: user.politiquesAccepted, userRole: user.role };
 		generateRefreshToken(user.id, res);
 		return res.json(response);
 	} catch (error) {
@@ -52,7 +52,7 @@ export const login = async (req: any, res: any) => {
 			return res.status(400).json({ message: "Credenciales Inválidas" });
 
 		//Generate Token & RefreshToken
-		const response = { ...generateToken(user.id), role: user.role };
+		const response = { ...generateToken(user.id), politiques: user.politiquesAccepted, userRole: user.role };
 		generateRefreshToken(user.id, res);
 		return res.json(response);
 	} catch (error) {
@@ -115,7 +115,7 @@ export const self = async (req: any, res: any) => {
 export const userByID = async (req: any, res: any) => {
 	try {
 		const user = await UserModel.findById(req.params.id);
-		return res.json({ userName: user?.userName });
+		return res.json({ name: user?.name });
 	} catch (error: any) {
 		return res.status(500).json({ message: error.message });
 	}
@@ -124,7 +124,7 @@ export const userByID = async (req: any, res: any) => {
 export const userByEmail = async (req: any, res: any) => {
 	try {
 		const user = await UserModel.findOne({email: req.params.email});
-		return res.json({ userName: user?.userName });
+		return res.json({ name: user?.name });
 	} catch (error: any) {
 		return res.status(500).json({ message: error.message });
 	}

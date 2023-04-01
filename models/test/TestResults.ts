@@ -7,12 +7,11 @@ const testResultsSchema = new Schema({
 		type: Date,
 		default: Date.now(),
 	},
-    tid: {
-		type: Schema.Types.ObjectId,
-		ref: "Test",
-		required: true,
-	},
-    respuestas: {
+    testTitle: {
+        type: String,
+        required: true,
+    },
+    answers: {
         type: Object,
         required: true,
     },

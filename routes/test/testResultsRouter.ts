@@ -1,6 +1,6 @@
 //Import tools
 import { Router } from "express";
-import { adminAuth } from "../../middleware/adminAuth";
+import { userOrAdminAuth } from "../../middleware/userOrAdminAuth";
 import { userAuth } from "../../middleware/userAuth";
 import { getAllTestResults, getTestResultsByUserID, createTestResults, deleteTestsResults } from "../../controllers/test/testResultsControllers";
 
@@ -8,11 +8,11 @@ import { getAllTestResults, getTestResultsByUserID, createTestResults, deleteTes
 const testResultsRouter = Router();
 
 //Routes
-testResultsRouter.get("/", adminAuth, getAllTestResults);
+testResultsRouter.get("/all", userOrAdminAuth, getAllTestResults);
 
 testResultsRouter.post("/", userAuth, createTestResults);
 
-testResultsRouter.get("/:id", userAuth, getTestResultsByUserID);
+testResultsRouter.get("/:id", userOrAdminAuth, getTestResultsByUserID);
 
 testResultsRouter.delete("/:id", userAuth, deleteTestsResults);
 

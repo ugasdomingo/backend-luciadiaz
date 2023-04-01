@@ -4,8 +4,9 @@ import TestResults from "../../models/test/TestResults";
 // getAllTestResults Controller
 export const getAllTestResults = async (req: any, res: any) => {
     try {
-		const testResults = await TestResults.find().lean();
-		return res.json({ testResults });
+		const testsResults = await TestResults.find().lean();
+
+		return res.json({ testsResults });
 	} catch (error: any) {
 		return res.status(500).json({ message: error.message });
 	}
@@ -14,12 +15,9 @@ export const getAllTestResults = async (req: any, res: any) => {
 // getTestResults By User ID Controller
 export const getTestResultsByUserID = async (req: any, res: any) => {
     try {
-		const testResults = await TestResults.findById(req.params.id);
+		const testsResults = await TestResults.find({uid: req.params.id});
 
-		if (req.uid != testResults?.uid) 
-			return res.status(401).json({message: 'No autorizado'})
-		
-		return res.json({ testResults });
+		return res.json({ testsResults });
 	} catch (error: any) {
 		return res.status(500).json({ message: error.message });
 	}   
@@ -27,11 +25,11 @@ export const getTestResultsByUserID = async (req: any, res: any) => {
 
 export const createTestResults = async (req: any, res: any) => {
     try {
-        const { respuestas, tid } = req.body;
+        const { answers, testTitle } = req.body;
 
         const testResults = new TestResults({
-            respuestas,
-			tid,
+            answers,
+			testTitle,
             uid: req.uid
         })
         await testResults.save();

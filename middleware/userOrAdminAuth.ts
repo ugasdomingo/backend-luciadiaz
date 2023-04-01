@@ -19,9 +19,9 @@ export const userOrAdminAuth = async (req: any, res: any, next: any) => {
 		req.uid = uid;
 
 		//Is Admin or a regitered user?
-		const Admin = await UserModel.findOne({ _id: uid });
-		if (Admin?.role !== "Admin")
-			if (uid != Admin?._id)
+		const user = await UserModel.findOne({ _id: uid });
+		if (user?.role !== "Admin")
+			if (uid != user?._id)
 				throw new Error(
 					"No tienes autorización para hacer esta operación"
 				);

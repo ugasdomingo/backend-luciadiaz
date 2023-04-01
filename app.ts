@@ -10,9 +10,8 @@ import authRouter from "./routes/authRouter";
 import blogRouter from "./routes/blogRouter";
 import booksRouter from "./routes/books/booksRouter";
 import bestDadRouter from "./routes/books/bestDadFormRouter";
-import coursesRouter from "./routes/formations/coursesRouter";
+import formationsRouter from "./routes/formations/formationsRouter";
 import enrollmentRouter from "./routes/formations/enrollmentRouter";
-import testRouter from "./routes/test/testRouter";
 import testResultsRouter from "./routes/test/testResultsRouter";
 
 //Define app
@@ -46,10 +45,9 @@ app.use("/api", authRouter);
 app.use("/api/blog", blogRouter);
 app.use("/api/books", booksRouter);
 app.use("/api/books/best-dad", bestDadRouter);
-app.use("/api/courses", coursesRouter);
-app.use("/api/courses/enrollment", enrollmentRouter);
-app.use("/api/test", testRouter);
-app.use("/api/test/results", testResultsRouter);
+app.use("/api/formations", formationsRouter);
+app.use("/api/formations/enrollment", enrollmentRouter);
+app.use("/api/test", testResultsRouter);
 
 //Export app
 export default app;

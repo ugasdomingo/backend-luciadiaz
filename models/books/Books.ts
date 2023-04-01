@@ -42,13 +42,17 @@ const booksSchema = new Schema({
 		},
 	},
 	tags: {
-		type: [String],
+		type: String,
 		required: true,
 	},
 	author: {
 		type: String,
 		default: 'Lucia Diaz',
 	},
-})
+	paypalButton: {
+		type: String,
+		required: true,
+	},
+});
 
 export default model("Books", booksSchema);

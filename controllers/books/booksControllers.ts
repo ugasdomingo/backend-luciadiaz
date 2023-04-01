@@ -1,6 +1,6 @@
 //Import tools
 import Books from "../../models/books/Books";
-import { uploadImage } from "../../utils/cloudinary";
+import { uploadImage, deleteImage } from "../../utils/cloudinary";
 import fs from "fs-extra";
 
 // GET All Books
@@ -8,6 +8,16 @@ export const getAllBooks = async (req: any, res: any) => {
 	try {
 		const books = await Books.find();
 		return res.json({ books });
+	} catch (error: any) {
+		return res.status(500).json({ message: error.message });
+	}
+};
+
+// GET A Book by ID
+export const getBookByID = async (req: any, res: any) => {
+	try {
+		const book = await Books.findById(req.params.id)
+		return res.json({ book });
 	} catch (error: any) {
 		return res.status(500).json({ message: error.message });
 	}
@@ -24,6 +34,7 @@ export const createBooks = async (req: any, res: any) => {
             price,
             tags,
             author,
+            paypalButton,
         } = req.body;
 
         const books = new Books({
@@ -34,17 +45,18 @@ export const createBooks = async (req: any, res: any) => {
             price,
             tags,
             author,
+            paypalButton,
             uid: req.uid,
         });
 
-        if (req.files?.image) {
-            const result = await uploadImage(req.files.image.tempFilePath);
+        if (req.files?.coverImage) {
+            const result = await uploadImage(req.files.coverImage.tempFilePath);
             books.coverImage = {
                 public_id: result.public_id,
                 secure_url: result.secure_url,
             };
 
-            await fs.unlink(req.files.image.tempFilePath);
+            await fs.unlink(req.files.coverImage.tempFilePath);
         }
 
         await books.save();
@@ -65,6 +77,7 @@ export const deleteBooks = async (req: any, res: any) => {
 				.status(404)
 				.json({ message: "Books no encontrado" });
 
+        await deleteImage(books.coverImage);
 		await Books.remove();
 
 		res.send({ books });

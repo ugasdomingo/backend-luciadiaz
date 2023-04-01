@@ -5,7 +5,7 @@ import bcryptjs from "bcryptjs";
 //Create Schema Methods Definitions
 interface IUserDocument extends Document {
 	date: Date;
-	userName: string;
+	name: string;
 	email: string;
 	password: string;
 	phone: string;
@@ -25,7 +25,7 @@ const userSchema = new Schema({
 		type: Date,
 		default: Date.now(),
 	},
-	userName: {
+	name: {
 		type: String,
 		required: true,
 		trim: true,
