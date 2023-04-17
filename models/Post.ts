@@ -15,11 +15,26 @@ const postSchema = new Schema(
 			trim: true,
 		},
 		img: {
-			type: String,
-		},
+			public_id: {
+				type: String,
+				required: true,
+			},
+			secure_url: {
+				type: String,
+				required: true,
+			},
+		},	
 		body: {
 			type: String,
 			required: true,
+		},
+		urlVideo: {
+			type: String,
+			required: true,
+		},
+		author: {
+			type: String,
+			default: 'Lucia Diaz'
 		},
 	},
 	{

@@ -10,7 +10,7 @@ import { createBooks, getAllBooks, deleteBooks, getBookByID } from "../../contro
 const booksRouter = Router();
 
 //Routes
-booksRouter.get('/', getAllBooks);
+booksRouter.get('/all', getAllBooks);
 
 booksRouter.post('/', fileUpload({
     useTempFiles: true,

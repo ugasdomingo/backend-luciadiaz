@@ -1,6 +1,8 @@
 //Import tools
 import { Router } from "express";
 import { adminAuth } from "../middleware/adminAuth";
+import fs from 'fs-extra';
+import fileUpload from 'express-fileupload';
 import {
 	createPost,
 	deletePost,
@@ -13,9 +15,12 @@ import {
 const blogRouter = Router();
 
 //Routes
-blogRouter.get("/", getAllPost);
+blogRouter.get("/all", getAllPost);
 
-blogRouter.post("/", adminAuth, createPost);
+blogRouter.post("/",fileUpload({
+	useTempFiles: true,
+	tempFileDir: './uploads',
+}), adminAuth, createPost);
 
 blogRouter.get("/:id", getPost);
 

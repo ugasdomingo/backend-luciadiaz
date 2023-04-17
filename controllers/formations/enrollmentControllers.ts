@@ -1,5 +1,7 @@
 //Import tools
 import Enrollment from "../../models/formations/Enrollment";
+import { uploadImage, deleteImage } from "../../utils/cloudinary";
+import fs from "fs-extra";
 
 // getAllEnrollment --> Line 10
 // createEnrollment --> Line 20
@@ -20,9 +22,19 @@ export const getAllEnrollment = async (req: any, res: any) => {
 // createEnrollment Controller
 export const createEnrollment = async (req: any, res: any) => {
 	try {
-		const { formationID, paymentMethod, numberProof } = req.body;
+		const { fid, paymentMethod,  } = req.body;
 
-		const enrollments = new Enrollment({ formationID, numberProof, paymentMethod, uid: req.uid, });
+		const enrollments = new Enrollment({ fid, paymentMethod, uid: req.uid, });
+
+		if (req.files?.paymentProof) {
+            const result = await uploadImage(req.files.paymentProof.tempFilePath);
+            enrollments.paymentProof = {
+                public_id: result.public_id,
+                secure_url: result.secure_url,
+            };
+
+            await fs.unlink(req.files.paymentProof.tempFilePath);
+        }
 		await enrollments.save();
 
 		res.json(enrollments);

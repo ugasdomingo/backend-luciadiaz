@@ -13,8 +13,9 @@ import fs from "fs-extra";
 export const getAllFormations = async (req: any, res: any) => {
 	try {
 		const formations = await Formations.find();
-		res.send(formations);
+		return res.send({formations});
 	} catch (error: any) {
+		console.log(error)
 		return res.status(500).json({ message: error.message });
 	}
 };
@@ -27,11 +28,12 @@ export const createFormations = async (req: any, res: any) => {
 			formationType,
 			description,
 			initialDate,
+			duration,
 			price,
 			location,
-			coverImage,
 			tags,
 			paypalButton,
+			videoUrl,
 		} = req.body; 
 
 		const formations = new Formations({  
@@ -39,11 +41,13 @@ export const createFormations = async (req: any, res: any) => {
 			formationType,
 			description,
 			initialDate,
+			duration,
 			price,
 			location,
-			coverImage,
 			tags,
 			paypalButton,
+			videoUrl,
+			uid: req.uid,
 		});
 
 		if (req.files?.coverImage) {
@@ -58,7 +62,7 @@ export const createFormations = async (req: any, res: any) => {
 
 		await formations.save();
 
-		res.json(formations);
+		res.json({formations});
 	} catch (error: any) {
 		return res.status(500).json({ message: error.message });
 	}

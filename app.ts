@@ -20,6 +20,7 @@ const app = express();
 const allowedOrigins = [
 	process.env.ORIGIN1 as string,
 	process.env.ORIGIN2 as string,
+	process.env.ORIGIN3 as string,
 ];
 
 //Middleware

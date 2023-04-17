@@ -9,21 +9,26 @@ const enrollmentSchema = new Schema({
 	},
     fid: {
 		type: Schema.Types.ObjectId,
-		ref: "Courses",
+		ref: "Formationss",
 		required: true,
 	},
-	numberProof: {
+	paymentMethod: {
 		type: String,
 		required: true,
 	},
+	paymentProof: {
+		public_id: {
+			type: String,
+			required: true,
+		},
+		secure_url: {
+			type: String,
+			required: true,
+		},
+	},	
     payed: {
 		type: Boolean,
-		required: true,
-		default: false,
-	},
-    paymentMethod: {
-		type: String,
-		required: true,
+		default: true,
 	},
     uid: {
 		type: Schema.Types.ObjectId,

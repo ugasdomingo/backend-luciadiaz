@@ -19,8 +19,9 @@ const formationsSchema = new Schema({
 		type: String,
 		required: true,
 	},
-    finalDate: {
+    duration: {
 		type: String,
+		required: true,
 	},
     price: {
 		type: String,
@@ -48,7 +49,11 @@ const formationsSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	videoUrl: {
+		type: String,
+		required: true,
+	},
 })
 
-export default model("Courses", formationsSchema);
+export default model("Formations", formationsSchema);
 
