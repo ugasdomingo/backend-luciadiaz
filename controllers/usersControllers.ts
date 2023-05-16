@@ -72,7 +72,9 @@ export const login = async (req: any, res: any) => {
             userName: user.name,
         };
         generateRefreshToken(user.id, res);
-        return res.json(response);
+        return res
+            .cookie('refreshToken', 'Esto es una prueba', { httpOnly: true })
+            .json(response);
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: 'Error en el servidor' });
