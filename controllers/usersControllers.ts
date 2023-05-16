@@ -38,10 +38,12 @@ export const register = async (req: any, res: any) => {
             ...generateToken(user.id),
             politiques: user.politiquesAccepted,
             userRole: user.role,
-			userName: user.name,
+            userName: user.name,
         };
         generateRefreshToken(user.id, res);
-        return res.json(response);
+        return res
+            .cookie('refreshToken', 'Esto es una prueba', { httpOnly: true })
+            .json(response);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Error en el servidor' });
@@ -67,7 +69,7 @@ export const login = async (req: any, res: any) => {
             ...generateToken(user.id),
             politiques: user.politiquesAccepted,
             userRole: user.role,
-			userName: user.name,
+            userName: user.name,
         };
         generateRefreshToken(user.id, res);
         return res.json(response);
@@ -96,7 +98,11 @@ export const refresh = async (req: any, res: any) => {
             process.env.JWT_REFRESH as string
         ) as JwtPayload;
         const user = await UserModel.findById(uid);
-        return res.json({ ...generateToken(uid), userRole: user?.role, userName: user?.name, });
+        return res.json({
+            ...generateToken(uid),
+            userRole: user?.role,
+            userName: user?.name,
+        });
     } catch (error: any) {
         return res.status(401).json({ message: error.message });
     }
