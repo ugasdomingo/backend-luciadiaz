@@ -41,9 +41,7 @@ export const register = async (req: any, res: any) => {
             userName: user.name,
         };
         generateRefreshToken(user.id, res);
-        return res
-            .cookie('refreshToken', 'Esto es una prueba', { httpOnly: true })
-            .json(response);
+        return res.json(response);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Error en el servidor' });
@@ -72,9 +70,7 @@ export const login = async (req: any, res: any) => {
             userName: user.name,
         };
         generateRefreshToken(user.id, res);
-        return res
-            .cookie('refreshToken2', 'Esto es una prueba', { httpOnly: true })
-            .json(response);
+        return res.json(response);
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: 'Error en el servidor' });
