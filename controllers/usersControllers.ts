@@ -73,7 +73,7 @@ export const login = async (req: any, res: any) => {
         };
         generateRefreshToken(user.id, res);
         return res
-            .cookie('refreshToken', 'Esto es una prueba', { httpOnly: true })
+            .cookie('refreshToken2', 'Esto es una prueba', { httpOnly: true })
             .json(response);
     } catch (error) {
         console.log(error);

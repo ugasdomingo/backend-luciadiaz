@@ -28,7 +28,6 @@ export const generateRefreshToken = (uid: string, res: any) => {
             httpOnly: true,
             secure: !(process.env.MODO === 'developer'),
             expires: new Date(Date.now() + expiresIn * 1000),
-            domain: 'luciadiaz.es',
         });
     } catch (error) {
         console.log(error);
