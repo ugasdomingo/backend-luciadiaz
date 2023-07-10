@@ -9,11 +9,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/",
-            "headers": {
-                "Access-Control-Allow-Origin": "https://www.luciadiaz.es",
-                "Access-Control-Allow-Credentials": "true"
-            }
+            "dest": "/"
         }
     ]
 }

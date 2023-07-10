@@ -25,6 +25,8 @@ export const generateRefreshToken = (uid: string, res: any) => {
             { expiresIn }
         );
         res.cookie('refreshToken', refreshToken, {
+            sameSite: 'Lax',
+            domain: 'luciadiaz.es',
             httpOnly: true,
             secure: true,
             expires: new Date(Date.now() + expiresIn * 1000),
