@@ -26,9 +26,8 @@ export const generateRefreshToken = (uid: string, res: any) => {
         );
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            sameSite: 'none',
             path: '/',
-            domain: 'www.luciadiaz.es',
+            domain: 'https://www.luciadiaz.es',
             secure: true,
             expires: new Date(Date.now() + expiresIn * 1000),
         });
