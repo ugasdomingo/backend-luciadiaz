@@ -34,13 +34,15 @@ export const register = async (req: any, res: any) => {
         //Email Validation
 
         //Generate Token & RefreshToken
+        const refreshToken = generateRefreshToken(user.id);
+
         const response = {
             ...generateToken(user.id),
+            refreshToken: refreshToken,
             politiques: user.politiquesAccepted,
             userRole: user.role,
             userName: user.name,
         };
-        generateRefreshToken(user.id, res);
         return res.json(response);
     } catch (error) {
         console.error(error);
@@ -63,13 +65,16 @@ export const login = async (req: any, res: any) => {
             return res.status(400).json({ message: 'Credenciales Inválidas' });
 
         //Generate Token & RefreshToken
+
+        const refreshToken = generateRefreshToken(user.id);
+
         const response = {
             ...generateToken(user.id),
+            refreshToken: refreshToken,
             politiques: user.politiquesAccepted,
             userRole: user.role,
             userName: user.name,
         };
-        generateRefreshToken(user.id, res);
         return res.json(response);
     } catch (error) {
         console.log(error);
@@ -85,8 +90,8 @@ export const refresh = async (req: any, res: any) => {
     }
 
     try {
-        let refreshTokenCookie = req.headers.cookie;
-        refreshTokenCookie = refreshTokenCookie.split('=')[1];
+        let refreshTokenCookie = req.headers.authorization;
+        refreshTokenCookie = refreshTokenCookie.split(' ')[1];
 
         if (!refreshTokenCookie)
             throw new Error('Debes hacer login para ver esta página');
@@ -96,8 +101,11 @@ export const refresh = async (req: any, res: any) => {
             process.env.JWT_REFRESH as string
         ) as JwtPayload;
         const user = await UserModel.findById(uid);
+
+        const refreshToken = generateRefreshToken(uid);
         return res.json({
             ...generateToken(uid),
+            refreshToken: refreshToken,
             userRole: user?.role,
             userName: user?.name,
         });
