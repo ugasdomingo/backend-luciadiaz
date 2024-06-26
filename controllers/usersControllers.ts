@@ -13,7 +13,7 @@ import jwt from 'jsonwebtoken';
 
 // Register Controller
 export const register = async (req: any, res: any) => {
-    const { name, email, phone, password, politiquesAccepted } = req.body;
+    const { name, email, phone, password, role, politiquesAccepted } = req.body;
 
     try {
         //Validate unique user
@@ -27,6 +27,7 @@ export const register = async (req: any, res: any) => {
             email,
             phone,
             password,
+            role,
             politiquesAccepted,
         });
         await user.save();

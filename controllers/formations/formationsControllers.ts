@@ -1,7 +1,7 @@
 //Import tools
-import Formations from "../../models/formations/Formations";
-import { uploadImage, deleteImage } from "../../utils/cloudinary";
-import fs from "fs-extra";
+import Formations from '../../models/formations/Formations';
+import { uploadFormationImage, deleteImage } from '../../utils/cloudinary';
+import fs from 'fs-extra';
 
 // getAllFormations --> Line 10
 // createFormations --> Line 20
@@ -11,47 +11,49 @@ import fs from "fs-extra";
 
 // getAllFormations Controller
 export const getAllFormations = async (req: any, res: any) => {
-	try {
-		const formations = await Formations.find();
-		return res.send({formations});
-	} catch (error: any) {
-		console.log(error)
-		return res.status(500).json({ message: error.message });
-	}
+    try {
+        const formations = await Formations.find();
+        return res.send({ formations });
+    } catch (error: any) {
+        console.log(error);
+        return res.status(500).json({ message: error.message });
+    }
 };
 
 // createFormations Controller
 export const createFormations = async (req: any, res: any) => {
-	try {
-		const { 
-			formationName,
-			formationType,
-			description,
-			initialDate,
-			duration,
-			price,
-			location,
-			tags,
-			paypalButton,
-			videoUrl,
-		} = req.body; 
+    try {
+        const {
+            formationName,
+            formationType,
+            description,
+            initialDate,
+            duration,
+            price,
+            location,
+            tags,
+            paypalButton,
+            videoUrl,
+        } = req.body;
 
-		const formations = new Formations({  
-			formationName,
-			formationType,
-			description,
-			initialDate,
-			duration,
-			price,
-			location,
-			tags,
-			paypalButton,
-			videoUrl,
-			uid: req.uid,
-		});
+        const formations = new Formations({
+            formationName,
+            formationType,
+            description,
+            initialDate,
+            duration,
+            price,
+            location,
+            tags,
+            videoUrl,
+            paypalButton,
+            uid: req.uid,
+        });
 
-		if (req.files?.coverImage) {
-            const result = await uploadImage(req.files.coverImage.tempFilePath);
+        if (req.files?.coverImage) {
+            const result = await uploadFormationImage(
+                req.files.coverImage.tempFilePath
+            );
             formations.coverImage = {
                 public_id: result.public_id,
                 secure_url: result.secure_url,
@@ -60,55 +62,61 @@ export const createFormations = async (req: any, res: any) => {
             await fs.unlink(req.files.coverImage.tempFilePath);
         }
 
-		await formations.save();
+        await formations.save();
 
-		res.json({formations});
-	} catch (error: any) {
-		return res.status(500).json({ message: error.message });
-	}
+        res.json({ formations });
+    } catch (error: any) {
+        return res.status(500).json({ message: error.message });
+    }
 };
 
 // getFormations Controller
 export const getFormations = async (req: any, res: any) => {
-	try {
-		const formations = await Formations.findById(req.params.id);
+    try {
+        const formations = await Formations.findById(req.params.id);
 
-		if (!formations)
-			return res.status(404).json({ message: "Formations no encontrado" });
-		res.send(formations);
-	} catch (error) {
-		return res.status(500).json({ message: "Formato id inválido" });
-	}
+        if (!formations)
+            return res
+                .status(404)
+                .json({ message: 'Formations no encontrado' });
+        res.send(formations);
+    } catch (error) {
+        return res.status(500).json({ message: 'Formato id inválido' });
+    }
 };
 
 // deleteFormations Controller
 export const deleteFormations = async (req: any, res: any) => {
-	try {
-		const formations = await Formations.findByIdAndDelete(req.params.id);
+    try {
+        const formations = await Formations.findByIdAndDelete(req.params.id);
 
-		if (!formations)
-			return res.status(404).json({ message: "Formations no encontrado" });
+        if (!formations)
+            return res
+                .status(404)
+                .json({ message: 'Formations no encontrado' });
 
-		await deleteImage(formations.coverImage);
-		res.send(formations);
-	} catch (error) {
-		return res.status(500).json({ message: "Formato id inválido" });
-	}
+        await deleteImage(formations.coverImage);
+        res.send(formations);
+    } catch (error) {
+        return res.status(500).json({ message: 'Formato id inválido' });
+    }
 };
 
 // updateFormations Controller
 export const updateFormations = async (req: any, res: any) => {
-	try {
-		const updatedFormations = await Formations.findByIdAndUpdate(
-			req.params.id,
-			req.body,
-			{ new: true }
-		);
+    try {
+        const updatedFormations = await Formations.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        );
 
-		if (!updatedFormations)
-			return res.status(404).json({ message: "Formations no encontrado" });
-		res.json(updatedFormations);
-	} catch (error) {
-		return res.status(500).json({ message: "Formato id inválido" });
-	}
+        if (!updatedFormations)
+            return res
+                .status(404)
+                .json({ message: 'Formations no encontrado' });
+        res.json(updatedFormations);
+    } catch (error) {
+        return res.status(500).json({ message: 'Formato id inválido' });
+    }
 };

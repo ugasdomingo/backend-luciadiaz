@@ -48,7 +48,7 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        default: 'visitante',
+        required: true,
     },
     politiquesAccepted: {
         type: Boolean,

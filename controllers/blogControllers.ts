@@ -1,6 +1,6 @@
 //Import tools
 import Post from '../models/Post';
-import { uploadImage, deleteImage } from '../utils/cloudinary';
+import { uploadPostImage, deleteImage } from '../utils/cloudinary';
 import fs from 'fs-extra';
 
 // getAllPost --> Line 10
@@ -13,7 +13,7 @@ import fs from 'fs-extra';
 export const getAllPost = async (req: any, res: any) => {
     try {
         const posts = await Post.find();
-        res.send({posts});
+        res.status(200).json({ posts });
     } catch (error: any) {
         return res.status(500).json({ message: error.message });
     }
@@ -25,19 +25,19 @@ export const createPost = async (req: any, res: any) => {
         const { title, category, body, urlVideo } = req.body;
 
         const post = new Post({ title, category, body, urlVideo });
-		
+
         if (req.files?.img) {
-			const result = await uploadImage(req.files.img.tempFilePath);
+            const result = await uploadPostImage(req.files.img.tempFilePath);
             post.img = {
-				public_id: result.public_id,
+                public_id: result.public_id,
                 secure_url: result.secure_url,
             };
-			
+
             await fs.unlink(req.files.img.tempFilePath);
         }
-		await post.save();
+        await post.save();
 
-        res.json({ post });
+        res.status(201).json({ post });
     } catch (error: any) {
         return res.status(500).json({ message: error.message });
     }
@@ -50,7 +50,7 @@ export const getPost = async (req: any, res: any) => {
 
         if (!post)
             return res.status(404).json({ message: 'Post no encontrado' });
-        res.send({post});
+        res.status(200).json({ post });
     } catch (error) {
         return res.status(500).json({ message: 'Formato id inválido' });
     }
@@ -65,7 +65,7 @@ export const deletePost = async (req: any, res: any) => {
             return res.status(404).json({ message: 'Post no encontrado' });
 
         await deleteImage(post.img);
-        res.send(post);
+        res.status(200).json({ message: 'Post eliminado' });
     } catch (error) {
         return res.status(500).json({ message: 'Formato id inválido' });
     }
@@ -82,7 +82,7 @@ export const updatePost = async (req: any, res: any) => {
 
         if (!updatedPost)
             return res.status(404).json({ message: 'Post no encontrado' });
-        res.json(updatedPost);
+        res.status(200).json({ updatedPost });
     } catch (error) {
         return res.status(500).json({ message: 'Formato id inválido' });
     }

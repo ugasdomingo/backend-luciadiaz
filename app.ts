@@ -10,10 +10,10 @@ import testRouter from './routes/testRouter';
 import authRouter from './routes/authRouter';
 import blogRouter from './routes/blogRouter';
 import booksRouter from './routes/books/booksRouter';
-import bestDadRouter from './routes/books/bestDadFormRouter';
 import formationsRouter from './routes/formations/formationsRouter';
 import enrollmentRouter from './routes/formations/enrollmentRouter';
 import testResultsRouter from './routes/test/testResultsRouter';
+import generalRouter from './routes/generalRouter';
 
 //Define app
 const app = express();
@@ -47,10 +47,10 @@ app.use('/', testRouter);
 app.use('/api', authRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/books', booksRouter);
-app.use('/api/books/best-dad', bestDadRouter);
 app.use('/api/formations', formationsRouter);
 app.use('/api/formations/enrollment', enrollmentRouter);
 app.use('/api/test', testResultsRouter);
+app.use('/api/general', generalRouter);
 
 //Export app
 export default app;
